@@ -1,0 +1,18 @@
+<!-- This launch file shows how to replay data from a bag file into a RosRaw connection for testing -->
+<launch>
+    <arg name="bagfile" default="/home/ivaughn/dev/nav/gps_ws/phins_standard_raw.bag"/>
+
+    <node name="phins" pkg="ds_sensors" type="sensor" args="--sensor=phins" output="screen">
+        <param name="health_check_period" type="double" value="1"/>
+        <param name="message_timeout" type="double" value="5"/>
+        <param name="descriptive_name" value="Phins ASCII"/>
+        <param name="frame_id" value="phins_link"/>
+
+        <param name="phins_standard/type" type="string" value="ROSRAW"/>
+        <param name="phins_standard/topic_rx" type="string" value="/recorded_phins_raw"/>
+        <param name="phins_standard/topic_tx" type="string" value="/connection_tx"/>
+    </node>
+
+    <remap from="/phins/phins_standard/raw" to="/recorded_phins_raw"/>
+    <node pkg="rosbag" type="play" name="raw_player" output="screen" args="--clock $(arg bagfile)"/>
+</launch>

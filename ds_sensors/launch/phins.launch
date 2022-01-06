@@ -1,0 +1,25 @@
+<launch>
+    <arg name="name" value="phins"/>
+    <arg name="sensor" doc="Sensor name" value="phins"/>
+    <node name="$(arg name)" pkg="ds_sensors" type="sensor" args="--sensor=$(arg sensor)" output="screen">
+        <param name="health_check_period" type="double" value="1"/>
+        <param name="message_timeout" type="double" value="5"/>
+        <param name="descriptive_name" value="Phins serial test on bench"/>
+        <param name="frame_id" value="phins_link"/>
+        <param name="phins_standard/type" value="SERIAL"/>
+        <param name="phins_standard/port" value="/dev/ttyUSB0"/>
+        <!--
+        <param name="phins_standard/baud" value="57600"/>
+        <param name="phins_standard/parity" value="odd"/>
+        <param name="phins_standard/stop_bits" value="2"/>
+        <param name="phins_standard/data_bits" value="8"/>
+        -->
+        <param name="phins_standard/baud" value="115200"/>
+        <param name="phins_standard/parity" value="none"/>
+        <param name="phins_standard/stop_bits" value="1"/>
+        <param name="phins_standard/data_bits" value="8"/>
+        <param name="phins_standard/matcher" value="match_char"/>
+        <param name="phins_standard/delimiter" value="0A"/>
+    </node>
+
+</launch>

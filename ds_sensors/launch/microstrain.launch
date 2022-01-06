@@ -1,0 +1,27 @@
+<launch>
+    <arg name="name" value="microstrain"/>
+    <arg name="sensor" doc="Sensor name" value="3dmgx5"/>
+    <node name="$(arg name)" pkg="ds_sensors" type="sensor" args="--sensor=$(arg sensor)" output="screen">
+        <param name="health_check_period" type="double" value="1"/>
+        <param name="message_timeout" type="double" value="5"/>
+        <param name="descriptive_name" value="Microstrain 3dm-gx5 AHRS"/>
+        <param name="frame_id" value="ustrain_link"/>
+    </node>
+    <group ns="microstrain">
+        <group ns="instrument">
+            <param name="type" value="SERIAL"/>
+            <param name="port" value="/dev/ttyUSB0"/>
+            <param name="baud" value="115200"/>
+            <param name="parity" value="none"/>
+            <param name="stop_bits" value="1"/>
+            <param name="data_bits" value="8"/>
+            <param name="matcher" value="match_header_read_length"/>
+            <param name="header" type="str" value="7565"/>
+            <param name="length_location_bytes" type="int" value="3"/>
+            <param name="length_field_bytes" type="int" value="1"/>
+            <param name="is_msb_first" type="bool" value="false"/>
+            <param name="add_to_length" type="int" value="6"/>
+            <param name="max_length" type="int" value="255"/>
+        </group>
+    </group>
+</launch>

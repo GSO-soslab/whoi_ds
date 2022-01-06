@@ -1,0 +1,24 @@
+<launch>
+    <arg name="name" value="paro_8CB"/>
+    <arg name="sensor" doc="Sensor name" value="paro"/>
+    <node name="$(arg name)" pkg="ds_sensors" type="sensor" args="--sensor=$(arg sensor)" output="screen">
+        <param name="send_startup_command" value="true"/>
+        <param name="latitude_deg" value="41.0007"/>
+        <param name="health_check_period" type="double" value="1"/>
+        <param name="message_timeout" type="double" value="5"/>
+        <param name="descriptive_name" value="Paro 8CB Added for the Gregg cruise"/>
+        <param name="depth_unit" value="psi"/>
+        <param name="frame_id" value="paro_link"/>
+        <param name="instrument/type" value="SERIAL"/>
+        <param name="instrument/port" value="/dev/ttyUSB1"/>
+        <param name="instrument/baud" value="9600"/>
+        <param name="instrument/parity" value="none"/>
+        <param name="instrument/stop_bits" value="1"/>
+        <param name="instrument/data_bits" value="8"/>
+        <param name="instrument/matcher" value="match_char"/>
+        <param name="instrument/delimiter" value="0A"/>
+    </node>
+
+    <node name="paro_8CB_zeroer" pkg="sentry_config" type="sentry_zeroparo" args="-d 15 --nodename /paro_8CB">
+    </node>
+</launch>

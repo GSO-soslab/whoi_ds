@@ -1,0 +1,30 @@
+<launch>
+    <node name="phinsbin" pkg="ds_sensors" type="sensor" args="--sensor=phins" output="screen">
+        <param name="health_check_period" type="double" value="1"/>
+        <param name="message_timeout" type="double" value="5"/>
+        <param name="descriptive_name" value="Phins Binary v3 Parser"/>
+        <param name="frame_id" type="string" value="phins_link"/>
+
+        <!-- Connect via UDP -->
+        <param name="instrument/type" type="string" value="UDP"/>
+        <param name="instrument/udp_rx" type="int" value="10010"/>
+        <param name="instrument/udp_tx" type="int" value="10011"/>
+        <param name="instrument/udp_address" type="string" value="10.0.0.205"/>
+
+        <!-- If you prefer a serial port... note that in practice, serial comms
+             are limited to 10Hz
+        <param name="instrument/type" type="str" value="SERIAL"/>
+        <param name="instrument/port" type="str" value="/dev/ttyUSB0"/>
+        <param name="instrument/baud" type="int" value="115200"/>
+        <param name="instrument/parity" type="str" value="none"/>
+        <param name="instrument/stop_bits" type="int" value="1"/>
+        <param name="instrument/data_bits" type="int" value="8"/>
+        <param name="instrument/matcher" type="str" value="match_header_read_length"/>
+        <param name="instrument/header" type="str" value="4958"/>
+        <param name="instrument/length_location_bytes" type="int" value="15"/>
+        <param name="instrument/length_field_bytes" type="int" value="2"/>
+        <param name="instrument/is_msb_first" type="bool" value="true"/>
+        <param name="instrument/add_to_length" type="int" value="0"/>
+        <param name="instrument/max_length" type="int" value="1000"/>
+        -->
+</launch>

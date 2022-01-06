@@ -1,0 +1,26 @@
+<launch>
+    <group ns="devices">
+        <include file="$(find ds_sensors)/launch/sensor.launch">
+            <arg name="name" value="dvl"/>
+            <arg name="sensor" value="rdidvl"/>
+        </include>
+        <group ns="dvl">
+            <param name="descriptive_name" type="str" value="My DVL Node"/>
+            <param name="health_check_period" type="double" value="15"/>
+            <param name="message_timeout" type="double" value="2"/>
+            <group ns="instrument">
+                <param name="type" value="UDP" />
+                <param name="udp_rx" value="50000" />
+                <param name="udp_address" value="127.0.0.1" />
+                <param name="udp_tx" value="50001" />
+                <param name="type" value="SERIAL" />
+                <param name="port" value="/dev/ttyUSB0" />
+                <param name="baud" value="38400" />
+                <param name="data_bits" value="8" />
+                <param name="matcher" value="match_header_length" />
+                <param name="header" value="7F7F" />
+                <param name="length" value="217" />
+            </group>
+        </group>
+    </group>
+</launch>

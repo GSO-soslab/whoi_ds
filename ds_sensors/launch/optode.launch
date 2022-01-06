@@ -1,0 +1,18 @@
+<launch>
+    <arg name="name" value="optode"/>
+    <arg name="sensor" doc="Sensor name" value="anderaa optode"/>
+    <node name="anderaa_optode" pkg="ds_sensors" type="sensor" args="anderaa_optode4831">
+        <param name="health_check_period" value="1"/>
+        <param name="message_timeout" value="5"/>
+        <param name="descriptive_name" value="Anderaa Optode"/>
+        <param name="frame_id" value="base_link"/>
+        <param name="instrument/type" value="SERIAL"/>
+        <param name="instrument/port" value="/dev/ttyUSB1"/>
+        <param name="instrument/baud" value="9600"/>
+        <param name="instrument/parity" value="none"/>
+        <param name="instrument/top_bits" value="1"/>
+        <param name="instrument/data_bits" value="8"/>
+        <param name="instrument/matcher" value="match_char"/>
+        <param name="instrument/delimiter" value="0A"/>
+    </node>
+</launch>

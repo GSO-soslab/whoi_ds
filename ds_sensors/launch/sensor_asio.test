@@ -1,0 +1,40 @@
+<!--
+    Run an IO test with ASIO using faked data over UDP
+    Example usage:
+        roslaunch ds_sensors sensor_asio.test sensor:=aps1540 test_data:="1.23 4.56 7.89 10.12"
+
+    Will create two nodes:
+        /sensor          the sensor driver
+        /sensor_tester   a node spitting the test string via UDP
+-->
+<launch>
+    <arg name="sensor" doc="Sensor name"/>
+    <arg name="connection_name" default="instrument"/>
+    <arg name="test_data" doc="Test string to send to sensor node via UDP"/>
+    <arg name="name" default="sensor" doc="Name of the node"/>
+    <arg name="update_rate" default="5" doc="Frequency to send new data"/>
+    <arg name="udp_listen" default="5000" doc="UDP port to listen on for test data"/>
+    <arg name="split" default="False" doc="Split test data on newlines"/>
+
+    <node name="$(arg name)" pkg="ds_sensors" type="sensor" args="--sensor=$(arg sensor)" output="screen">
+        <param name="$(arg connection_name)/type" value="UDP" type="str"/>
+        <param name="$(arg connection_name)/udp_rx" value="$(arg udp_listen)" type="int" />
+        <param name="$(arg connection_name)/udp_tx" value="9999" type="int" />
+        <param name="$(arg connection_name)/udp_address" value="127.0.0.1" type="str" />
+        <param name="health_check_period" value="5"  type="int"/>
+        <param name="message_timeout" value="1"  type="int"/>
+        <param name="serial_number" value="123521" type="str"/>
+        <param name="descriptive_name" value="Example Sensor" type="str"/>
+    </node>
+    <node name="$(arg name)_tester" pkg="ds_sensors" type="test_data_node" output="screen">
+        <param name="instrument/type" value="UDP" type="str"/>
+        <param name="instrument/udp_address" value="127.0.0.1" type="str"/>
+        <param name="instrument/udp_tx" value="$(arg udp_listen)" type="int"/>
+        <param name="instrument/udp_rx" value="9999" type="int" />
+        <param name="update_rate" value="$(arg update_rate)" type="int"/>
+        <param name="test_data" value="$(arg test_data)" type="str"/>
+        <param name="descriptive_name" value="Test UDP Node" type="str"/>
+        <param name="split" value="$(arg split)" type="bool"/>
+    </node>
+
+</launch>

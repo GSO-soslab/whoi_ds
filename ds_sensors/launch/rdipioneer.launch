@@ -1,0 +1,28 @@
+<launch>
+    <group ns="devices">
+        <node name="dvlPioneer" pkg="ds_sensors" type="sensor" args="--sensor=rdidvl" output="screen"/>
+        <group ns="dvlPioneer">
+            <param name="descriptive_name" type="str" value="RDI Pioneer DVL"/>
+            <param name="frame_id" type="str" value="dvlPioneer_link"/>
+            <param name="health_check_period" type="double" value="15"/>
+            <param name="message_timeout" type="double" value="2"/>
+            <param name="phased_array" type="bool" value="true"/>
+
+            <group ns="instrument">
+                <param name="type" type="str" value="SERIAL"/>
+                <param name="port" type="str" value="/dev/ttyS12"/>
+                <param name="baud" type="int" value="115200"/>
+                <param name="parity" type="str" value="none"/>
+                <param name="stop_bits" type="int" value="1"/>
+                <param name="data_bits" type="int" value="8"/>
+                <param name="matcher" type="str" value="match_header_read_length"/>
+                <param name="header" type="str" value="7f7f"/>
+                <param name="length_location_bytes" type="int" value="2"/>
+                <param name="length_field_bytes" type="int" value="2"/>
+                <param name="is_msb_first" type="bool" value="false"/>
+                <param name="add_to_length" type="int" value="2"/>
+                <param name="max_length" type="int" value="1000"/>
+            </group>
+        </group>
+    </group>
+</launch>

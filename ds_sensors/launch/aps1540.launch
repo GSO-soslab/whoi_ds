@@ -1,0 +1,23 @@
+<!--
+    Launch file for starting a sensor node
+    Example:
+        roslaunch ds_sensors sensor name:=my_maggie_node sensor:=aps1540
+-->
+<launch>
+    <node name="aps1540" pkg="ds_sensors" type="sensor" args="--sensor=aps1540" output="screen">
+        <param name="instrument/type" value="SERIAL" type="str"/>
+        <param name="instrument/port" value="/dev/ttyS1" type="str"/>
+        <param name="instrument/baud" value="9600" />
+        <param name="instrument/data_bits" value="8" />
+        <param name="instrument/parity" value="none" />
+        <param name="instrument/stopbits" value="1" />
+        <param name="instrument/matcher" value="match_char" />
+        <param name="instrument/delimiter" value="0A" />
+        <!--
+        <param name="instrument/udp_tx" value="$(arg udp_listen)" type="int"/>
+        <param name="instrument/udp_rx" value="9999" type="int" />
+        <param name="update_rate" value="$(arg update_rate)" type="int"/>
+        <param name="test_data" value="$(arg test_data)" type="str"/>
+        -->
+    </node>
+</launch>

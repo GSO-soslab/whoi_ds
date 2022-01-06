@@ -1,0 +1,18 @@
+<launch>
+    <arg name="name" value="nortek"/>
+    <arg name="sensor" doc="Sensor name" value="nortekvector" />
+    <node name="$(arg name)" pkg="ds_sensors" type="sensor" args="--sensor=$(arg sensor)">
+        <param name="health_check_period" type="double" value="1"/>
+        <param name="message_timeout" type="double" value="5"/>
+        <param name="descriptive_name" value="Nortek Vector"/>
+        <param name="instrument/type" value="SERIAL"/>
+        <param name="instrument/port" value="/dev/ttyXR3"/>
+        <param name="instrument/baud" value="38400"/>
+        <param name="instrument/parity" value="none"/>
+        <param name="instrument/stop_bits" value="1"/>
+        <param name="instrument/data_bits" value="8"/>
+        <param name="instrument/matcher" value="match_multi_header_length"/>
+        <rosparam param="instrument/headers">["A510", "A511"]</rosparam>
+        <rosparam param="instrument/lengths">[24, 28]</rosparam>
+    </node>
+</launch>

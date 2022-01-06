@@ -1,0 +1,11 @@
+<launch>
+    <include file="$(find ds_sensors)/launch/sensor_asio.test">
+        <arg name="name" value="phins"/>
+        <arg name="connection_name" value="phins_standard"/>
+        <arg name="sensor" value="phins"/>
+        <arg name="update_rate" value="5"/>
+        <arg name="udp_listen" value="5000"/>
+        <arg name="test_data" value="$HEHDT,206.08,T*13\r\n$PIXSE,ATITUD,-0.569,1.925*4A\r\n$PIXSE,STDHRP,0.013,0.001,0.001*72\r\n"/>
+        <arg name="split" value="false"/>
+    </include>
+</launch>

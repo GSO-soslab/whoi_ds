@@ -1,0 +1,25 @@
+<launch>
+    <group ns="devices">
+        <include file="$(find ds_sensors)/launch/sensor.launch">
+            <arg name="name" value="example"/>
+            <arg name="sensor" value="xeos_gps"/>
+        </include>
+        <group ns="example">
+            <param name="descriptive_name" type="str" value="Example GPS Node"/>
+            <param name="health_check_period" type="double" value="15"/>
+            <param name="message_timeout" type="double" value="2"/>
+            <group ns="instrument">
+            <!--
+                <param name="type" type="string" value="UDP"/>
+                <param name="udp_rx" type="int" value="5000"/>
+                <param name="udp_tx" type="int" value="5001"/>
+                <param name="udp_address" type="string" value="127.0.0.1"/>
+            -->
+                <param name="type" type="string" value="SERIAL"/>
+                <param name="port" type="string" value="/dev/ttyUSB0"/>
+                <param name="baud" type="int" value="57600"/>
+
+            </group>
+        </group>
+    </group>
+</launch>
